@@ -14,6 +14,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
+import { Route as IncomeImport } from './routes/income'
+import { Route as ExpenseImport } from './routes/expense'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as AuthImport } from './routes/_auth'
@@ -40,6 +42,16 @@ const EneroIndexLazyImport = createFileRoute('/enero/')()
 
 const LoginRoute = LoginImport.update({
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const IncomeRoute = IncomeImport.update({
+  path: '/income',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ExpenseRoute = ExpenseImport.update({
+  path: '/expense',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -173,6 +185,20 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/expense': {
+      id: '/expense'
+      path: '/expense'
+      fullPath: '/expense'
+      preLoaderRoute: typeof ExpenseImport
+      parentRoute: typeof rootRoute
+    }
+    '/income': {
+      id: '/income'
+      path: '/income'
+      fullPath: '/income'
+      preLoaderRoute: typeof IncomeImport
       parentRoute: typeof rootRoute
     }
     '/login': {
@@ -349,6 +375,8 @@ export interface FileRoutesByFullPath {
   '/$month': typeof MonthRoute
   '': typeof LayoutRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
+  '/expense': typeof ExpenseRoute
+  '/income': typeof IncomeRoute
   '/login': typeof LoginRoute
   '/route-group': typeof thisFolderIsNotInTheUrlRouteGroupRoute
   '/profile': typeof AuthProfileRoute
@@ -369,6 +397,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$month': typeof MonthRoute
   '': typeof LayoutRouteWithChildren
+  '/expense': typeof ExpenseRoute
+  '/income': typeof IncomeRoute
   '/login': typeof LoginRoute
   '/route-group': typeof thisFolderIsNotInTheUrlRouteGroupRoute
   '/profile': typeof AuthProfileRoute
@@ -390,6 +420,8 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteWithChildren
   '/_layout': typeof LayoutRouteWithChildren
   '/dashboard': typeof DashboardRouteWithChildren
+  '/expense': typeof ExpenseRoute
+  '/income': typeof IncomeRoute
   '/login': typeof LoginRoute
   '/route-group': typeof thisFolderIsNotInTheUrlRouteGroupRoute
   '/_auth/profile': typeof AuthProfileRoute
@@ -413,6 +445,8 @@ export interface FileRouteTypes {
     | '/$month'
     | ''
     | '/dashboard'
+    | '/expense'
+    | '/income'
     | '/login'
     | '/route-group'
     | '/profile'
@@ -432,6 +466,8 @@ export interface FileRouteTypes {
     | '/'
     | '/$month'
     | ''
+    | '/expense'
+    | '/income'
     | '/login'
     | '/route-group'
     | '/profile'
@@ -451,6 +487,8 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_layout'
     | '/dashboard'
+    | '/expense'
+    | '/income'
     | '/login'
     | '/route-group'
     | '/_auth/profile'
@@ -474,6 +512,8 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRouteWithChildren
   LayoutRoute: typeof LayoutRouteWithChildren
   DashboardRoute: typeof DashboardRouteWithChildren
+  ExpenseRoute: typeof ExpenseRoute
+  IncomeRoute: typeof IncomeRoute
   LoginRoute: typeof LoginRoute
   thisFolderIsNotInTheUrlRouteGroupRoute: typeof thisFolderIsNotInTheUrlRouteGroupRoute
   EneroIndexLazyRoute: typeof EneroIndexLazyRoute
@@ -486,6 +526,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRouteWithChildren,
   LayoutRoute: LayoutRouteWithChildren,
   DashboardRoute: DashboardRouteWithChildren,
+  ExpenseRoute: ExpenseRoute,
+  IncomeRoute: IncomeRoute,
   LoginRoute: LoginRoute,
   thisFolderIsNotInTheUrlRouteGroupRoute:
     thisFolderIsNotInTheUrlRouteGroupRoute,
@@ -510,6 +552,8 @@ export const routeTree = rootRoute
         "/_auth",
         "/_layout",
         "/dashboard",
+        "/expense",
+        "/income",
         "/login",
         "/route-group",
         "/enero/",
@@ -542,6 +586,12 @@ export const routeTree = rootRoute
         "/dashboard/users",
         "/dashboard/"
       ]
+    },
+    "/expense": {
+      "filePath": "expense.tsx"
+    },
+    "/income": {
+      "filePath": "income.tsx"
     },
     "/login": {
       "filePath": "login.tsx"

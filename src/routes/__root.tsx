@@ -34,8 +34,12 @@ function RootComponent() {
                     <div className={`text-3xl`}>
                         <RouterSpinner />
                     </div>
-                    <Button>Nuevo Gasto</Button>
-                    <Button>Nuevo Ingreso</Button>
+                    <Button>
+                        <Link to="/expense">Agregar Gasto</Link>
+                    </Button>
+                    <Button>
+                        <Link to="/income">Registrar Ingreso</Link>
+                    </Button>
                 </div>
                 <div className={`flex-1 flex`}>
                     <div className={`divide-y w-56`}>
